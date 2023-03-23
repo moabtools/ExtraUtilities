@@ -8,7 +8,7 @@
     <RepositoryUrl>https://github.com/moabtools/ExtraUtilities</RepositoryUrl>
     <Version>1.0.12</Version>
     <FileVersion>1.0.12.0</FileVersion>
-    <PackageReleaseNotes>Some useful methods for different life situations. More details: https://github.com/moabtools/ExtraUtilities</PackageReleaseNotes>
+    <PackageReleaseNotes></PackageReleaseNotes>
     <Description>Some useful methods for different life situations. More details: https://github.com/moabtools/ExtraUtilities</Description>
   </PropertyGroup>
 
