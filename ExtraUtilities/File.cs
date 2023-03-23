@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace ExtraUtilities
@@ -36,18 +38,38 @@ namespace ExtraUtilities
         }
 
         /// <summary>
+        /// Нормализация пути для сравнения
+        /// </summary>
+        /// <param name="path">Путь</param>
+        /// <returns></returns>
+        public static string NormalizePath(string path)
+        {
+            return Path.GetFullPath(new Uri(path).LocalPath)
+                       .TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
+                       .ToUpperInvariant();
+        }
+
+        /// <summary>
         /// Копирование папки с вложенными папками и файлами
         /// </summary>
         /// <param name="sourcePath">Откуда копировать</param>
         /// <param name="targetPath">Куда копировать</param>
         /// <param name="overwrite">Перезаписывать существующие файлы</param>
-        public static void CopyFilesRecursively(string sourcePath, string targetPath, bool overwrite = true)
+        public static void CopyFilesRecursively(string sourcePath, string targetPath, bool overwrite = true, string[] excludePaths = null!)
         {
             foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
+            {
+                if (excludePaths.Any(x => NormalizePath(x) == NormalizePath(dirPath)))
+                    continue;
                 Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
+            }
 
             foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
+            {
+                if (excludePaths.Any(x => NormalizePath(x) == NormalizePath(newPath)))
+                    continue;
                 System.IO.File.Copy(newPath, newPath.Replace(sourcePath, targetPath), overwrite);
+            }
         }
     }
 }
