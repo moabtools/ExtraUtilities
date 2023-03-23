@@ -59,14 +59,14 @@ namespace ExtraUtilities
         {
             foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
             {
-                if (excludePaths.Any(x => NormalizePath(x) == NormalizePath(dirPath)))
+                if (excludePaths.Any(x => NormalizePath(dirPath).StartsWith(NormalizePath(x))))
                     continue;
                 Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
             }
 
             foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
             {
-                if (excludePaths.Any(x => NormalizePath(x) == NormalizePath(newPath)))
+                if (excludePaths.Any(x => NormalizePath(newPath).StartsWith(NormalizePath(x))))
                     continue;
                 System.IO.File.Copy(newPath, newPath.Replace(sourcePath, targetPath), overwrite);
             }
