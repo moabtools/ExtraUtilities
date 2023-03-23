@@ -21,10 +21,10 @@ namespace ExtraUtilities
         }
 
         /// <summary>
-        /// Получает значение name атрибута [Display(name="...")] значения перечисления
+        /// Получает значение name атрибута [Display(Name="...")] значения перечисления
         /// </summary>
         /// <param name="value">Значение перечисления</param>
-        /// <returns>Значение name атрибута [Display(name="...")] значения перечисления</returns>
+        /// <returns>Значение name атрибута [Display(Name="...")] значения перечисления</returns>
         public static string GetDisplayName(this Enum value)
         {
             return value.GetType()
@@ -32,6 +32,20 @@ namespace ExtraUtilities
                             .First()
                             .GetCustomAttribute<DisplayAttribute>()!
                             .GetName()!;
+        }
+
+        /// <summary>
+        /// Получает значение name атрибута [Display(ShortName="...")] значения перечисления
+        /// </summary>
+        /// <param name="value">Значение перечисления</param>
+        /// <returns>Значение name атрибута [Display(ShortName="...")] значения перечисления</returns>
+        public static string GetDisplayShortName(this Enum value)
+        {
+            return value.GetType()
+                            .GetMember(value.ToString())
+                            .First()
+                            .GetCustomAttribute<DisplayAttribute>()!
+                            .GetShortName()!;
         }
     }
 }

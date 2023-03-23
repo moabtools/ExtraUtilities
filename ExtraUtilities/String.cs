@@ -116,5 +116,24 @@ namespace ExtraUtilities
             return (input.Length % 4 == 0) && Const.BASE64.IsMatch(input);
         }
 
+        /// <summary>
+        /// Проверяет, содержит ли строка любой из элементов массива строк
+        /// </summary>
+        /// <param name="input">Исходная строка</param>
+        /// <param name="values">Массив исходных строк</param>
+        public static bool ContainsAny(this string str, string[] values, StringComparison comparisonType = StringComparison.Ordinal)
+        {
+            if (!string.IsNullOrEmpty(str) || values.Length > 0)
+            {
+                foreach (string value in values)
+                {
+                    if (str.Contains(value, comparisonType))
+                        return true;
+                }
+            }
+
+            return false;
+        }
+
     }
 }

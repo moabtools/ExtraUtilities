@@ -34,5 +34,20 @@ namespace ExtraUtilities
 
             return sanitisedNamePart;
         }
+
+        /// <summary>
+        /// Копирование папки с вложенными папками и файлами
+        /// </summary>
+        /// <param name="sourcePath">Откуда копировать</param>
+        /// <param name="targetPath">Куда копировать</param>
+        /// <param name="overwrite">Перезаписывать существующие файлы</param>
+        public static void CopyFilesRecursively(string sourcePath, string targetPath, bool overwrite = true)
+        {
+            foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
+                Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
+
+            foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
+                System.IO.File.Copy(newPath, newPath.Replace(sourcePath, targetPath), overwrite);
+        }
     }
 }

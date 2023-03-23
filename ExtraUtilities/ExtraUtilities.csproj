@@ -5,6 +5,9 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <RepositoryUrl>https://github.com/moabtools/ExtraUtilities</RepositoryUrl>
+    <Version>1.0.10</Version>
+    <FileVersion>1.0.10.0</FileVersion>
   </PropertyGroup>
 
 </Project>
