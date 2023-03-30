@@ -123,11 +123,11 @@ namespace ExtraUtilities
         /// <param name="values">Массив исходных строк</param>
         public static bool ContainsAny(this string str, string[] values, StringComparison comparisonType = StringComparison.Ordinal)
         {
-            if (!string.IsNullOrEmpty(str) || values.Length > 0)
+            if (!string.IsNullOrEmpty(str) && values.Length > 0)
             {
-                foreach (string value in values)
+                for (int i = 0; i < values.Length; i++)
                 {
-                    if (str.Contains(value, comparisonType))
+                    if (str.Contains(values[i], comparisonType))
                         return true;
                 }
             }

@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace ExtraUtilities
 {
-    public class File
+    public class Files
     {
         /// <summary>
         /// Возвращает имя файла, очищенное от неподдерживаемых символов и специальных наименований, таких как CON, PRN, LPT и пр.
