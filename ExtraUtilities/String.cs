@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -117,18 +118,27 @@ namespace ExtraUtilities
         }
 
         /// <summary>
-        /// Проверяет, содержит ли строка любой из элементов массива строк
+        /// Проверяет, содержит ли строка любой из элементов массива строк. Правила сравнения строк не используются, нужно учитывать регистр символов.
         /// </summary>
         /// <param name="input">Исходная строка</param>
-        /// <param name="values">Массив исходных строк</param>
-        public static bool ContainsAny(this string str, string[] values, StringComparison comparisonType = StringComparison.Ordinal)
+        /// <param name="values">Массив строк для сравнения</param>
+        public static bool ContainsAny(this string str, string[] values, bool wholeWords = false)
         {
             if (!string.IsNullOrEmpty(str) && values.Length > 0)
             {
+                HashSet<string> words = new(str.Split(" "));
+
                 for (int i = 0; i < values.Length; i++)
                 {
-                    if (str.Contains(values[i], comparisonType))
-                        return true;
+                    if(wholeWords)
+                    {
+                        HashSet<string> values_words = new(values[i].Split(" "));
+                        if (values_words.IsSubsetOf(words)) 
+                            return true;
+                    }
+                    else
+                        if (str.Contains(values[i]))
+                            return true;
                 }
             }
 
