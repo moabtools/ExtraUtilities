@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ExtraUtilities
@@ -139,6 +140,25 @@ namespace ExtraUtilities
                     else
                         if (str.Contains(values[i]))
                             return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Проверяет, содержит ли строка любой из элементов массива строк, содержащих регулярные выражения. Правила сравнения строк не используются, нужно учитывать регистр символов.
+        /// </summary>
+        /// <param name="input">Исходная строка</param>
+        /// <param name="values">Массив строк для сравнения</param>
+        public static bool ContainsAnyRegex(this string str, string[] values)
+        {
+            if (!string.IsNullOrEmpty(str) && values.Length > 0)
+            {
+                for (int i = 0; i < values.Length; i++)
+                {
+                    if (Regex.IsMatch(str, values[i]))
+                        return true;
                 }
             }
 
