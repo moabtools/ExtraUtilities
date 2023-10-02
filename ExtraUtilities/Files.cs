@@ -71,5 +71,17 @@ namespace ExtraUtilities
                 System.IO.File.Copy(newPath, newPath.Replace(sourcePath, targetPath), overwrite);
             }
         }
+
+        /// <summary>
+        /// Получает расширение файла из URL
+        /// </summary>
+        /// <param name="url">URL, расширение файла из которого нужно получить</param>
+        /// <returns></returns>
+        public static string GetFileExtensionFromUrl(string url)
+        {
+            url = url.Split('?')[0];
+            url = url.Split('/').Last();
+            return url.Contains('.') ? url.Substring(url.LastIndexOf('.')) : "";
+        }
     }
 }

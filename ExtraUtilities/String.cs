@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace ExtraUtilities
 {
@@ -20,7 +17,7 @@ namespace ExtraUtilities
             if (string.IsNullOrEmpty(str) || char.IsLower(str[0]))
                 return str;
 
-            return char.ToLower(str[0]) + str.Substring(1);
+            return char.ToLower(str[0]) + str[1..];
         }
 
         /// <summary>
@@ -33,7 +30,7 @@ namespace ExtraUtilities
             if (string.IsNullOrEmpty(str) || char.IsUpper(str[0]))
                 return str;
 
-            return char.ToUpper(str[0]) + str.Substring(1);
+            return char.ToUpper(str[0]) + str[1..];
         }
 
         /// <summary>
@@ -56,7 +53,7 @@ namespace ExtraUtilities
         public static string RemoveTrainingSlash(this string url)
         {
             if (url.EndsWith("/"))
-                return url.Substring(0, url.Length - 1);
+                return url[..^1];
             else
                 return url;
         }
