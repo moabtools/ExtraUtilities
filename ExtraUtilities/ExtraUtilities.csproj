@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>net7.0</TargetFrameworks>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/moabtools/ExtraUtilities</RepositoryUrl>
-    <Version>1.0.18</Version>
-    <FileVersion>1.0.18.0</FileVersion>
+    <Version>1.0.19</Version>
+    <FileVersion>1.0.19.0</FileVersion>
     <PackageReleaseNotes></PackageReleaseNotes>
     <Description>Some useful methods for different life situations. More details: https://github.com/moabtools/ExtraUtilities</Description>
   </PropertyGroup>

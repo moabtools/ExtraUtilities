@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -82,6 +83,31 @@ namespace ExtraUtilities
             url = url.Split('?')[0];
             url = url.Split('/').Last();
             return url.Contains('.') ? url.Substring(url.LastIndexOf('.')) : "";
+        }
+
+        /// <summary>
+        /// Удаляет директорию и все вложенные файлы (если recursive=true), кроме указанных в except
+        /// </summary>
+        /// <param name="folderPath">Папка, которую нужно удалить</param>
+        /// <param name="except">Имена файлов, которые удалять не нужно (не полные пути, а именно имена)</param>
+        /// <param name="recursive">Нужно ли удалять рекурсивно или только файлы в указанной директории</param>
+        public static void DeleteAllExcept(string folderPath, List<string> except, bool recursive = true)
+        {
+            var dir = new DirectoryInfo(folderPath);
+
+            foreach (var fi in dir.GetFiles().Where(n => !except.Contains(n.Name)))
+                fi.Delete();
+
+            if (recursive)
+            {
+                foreach (var di in dir.GetDirectories())
+                {
+                    DeleteAllExcept(di.FullName, except, recursive);
+
+                    if (!di.EnumerateFileSystemInfos().Any())
+                        di.Delete();
+                }
+            }
         }
     }
 }
